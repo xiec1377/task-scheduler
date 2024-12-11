@@ -1,0 +1,45 @@
+# Python bytecode
+*.py[cod]
+__pycache__/
+*.so
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+*.env
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+*.pyo
+db.sqlite3
+db.sqlite3-journal
+
+# Media/Uploads
+media/
+*.webm
+*.mp4
+*.jpg
+*.png
+*.jpeg
+
+# Static files
+staticfiles/
+static/
+
+# Local settings
+local_settings.py
+
+# Tests
+coverage.xml
+*.cover
+.hypothesis/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# IDEs
