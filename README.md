@@ -13,10 +13,14 @@ The algorithm will consider:
 - Tasks are split into intervals where each interval will be capped at 50 minutes, with a 10 minute break between each interval (this follows Pomodoro timer method)
 
 ### Frontend
-Built in Next.js, Tailwind.CSS
+Built in Typescript, Next.js, Tailwind.CSS
+
+Run `npm run dev`
 
 ### Backend
 Built in Python (Django framework)
+
+Run `python manage.py runserver`
 
 ### Future features
 - Gamify it so the user can earn points/rewards for following the schedule
