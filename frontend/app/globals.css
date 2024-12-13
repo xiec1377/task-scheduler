@@ -23,3 +23,23 @@ body {
 .rbc-toolbar .rbc-btn-group {
   display: none;
 }
+
+.rbc-toolbar .rbc-toolbar-label {
+  font-size: 20px;
+}
+
+.rbc-timeslot-group>.rbc-time-slot {
+  border-bottom: 1px solid rgb(209, 209, 209) !important;
+}
+
+.rbc-time-view {
+  background-color: transparent;
+}
+
+/* .rbc-row,
+.rbc-time-slot {
+  background-color: transparent !important; 
+  backdrop-filter: blur(4px) !important; 
+  color: white; 
+} */
+

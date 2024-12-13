@@ -83,9 +83,7 @@ export default function TaskForm() {
 
   return (
     <div className="w-[90vw] p-6 flex flex-col items-center gap-4">
-      <h1 className="w-full text-3xl font-bold text-center text-white mb-6">
-        Task Scheduler
-      </h1>
+      <h1 className="w-full text-3xl font-bold text-center text-white mb-6">Task Scheduler</h1>
       <div className="w-full flex flex-row items-start justify-center gap-4">
         <div className="w-1/3 flex flex-col items-start gap-4">
           <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
