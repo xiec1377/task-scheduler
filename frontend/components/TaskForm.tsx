@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 interface Task {
   name: string;
@@ -9,8 +12,12 @@ interface Task {
 }
 
 interface ScheduleItem {
-  time: string;
-  task: string;
+  // start: Date | null;
+  // end: Date | null;
+  // title: string | ChildProcessWithoutNullStreams;
+  title: string;
+  start: Date;
+  end: Date;
 }
 
 export default function TaskForm() {
@@ -54,11 +61,38 @@ export default function TaskForm() {
       }
       const result = await response.json();
       console.log("result:", result);
-      setSchedule(result);
+      // setSchedule(result);
+      setSchedule(
+        result?.map((item: ScheduleItem) => ({
+          title: item.title,
+          start: new Date(
+            new Date().toISOString().split("T")[0] + "T" + item.start
+          ),
+          end: new Date(
+            new Date().toISOString().split("T")[0] + "T" + item.end
+          ),
+        }))
+      );
     } catch (error) {
       console.error("Error generating schedule:", error);
     }
   };
+  console.log("schedule:", schedule);
+  // const myEventsList = schedule;
+  // const myEventsList = [
+  //   {
+  //     title: "Meeting with Team",
+  //     start: new Date(2024, 11, 12, 10, 0), // Dec 12, 2024, 10:00 AM
+  //     end: new Date(2024, 11, 12, 11, 0), // Dec 12, 2024, 11:00 AM
+  //   },
+  //   {
+  //     title: "Project Deadline",
+  //     start: new Date(2024, 11, 15, 9, 0), // Dec 15, 2024, 9:00 AM
+  //     end: new Date(2024, 11, 15, 17, 0), // Dec 15, 2024, 5:00 PM
+  //   },
+  // ];
+
+  const localizer = momentLocalizer(moment);
 
   return (
     <div className="w-[80vh] p-6 flex flex-col items-center gap-4">
@@ -139,14 +173,23 @@ export default function TaskForm() {
           </button>
         </div>
       </div>
-
+      <Calendar
+        localizer={localizer}
+        events={schedule ?? []}
+        selectable={true} 
+        startAccessor="start"
+        endAccessor="end"
+        view="day"
+        style={{ height: 500 }}
+        className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full max-w-lg text-white"
+      />
       <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full max-w-lg">
         <h2 className="text-xl font-semibold text-white mb-4">Tasks</h2>
         <ul className="space-y-2">
           {tasks.map((task, index) => (
             <li key={index} className="rounded-lg p-3 shadow-sm">
               <span className="font-medium">{task.name}</span> (Difficulty:{" "}
-              {task.difficulty}, Priority: {task.priority})
+              {task.difficulty}, Priority: {task.priority}, Time: {task.time})
             </li>
           ))}
         </ul>
@@ -164,7 +207,8 @@ export default function TaskForm() {
           <ul className="space-y-2">
             {schedule?.map((item, index) => (
               <li key={index} className="rounded-lg p-3 shadow-sm ">
-                {item.time} - {item.task}
+                {item.title} :{" "}
+                {new Date().toISOString().split("T")[0] + "T" + item.start}
               </li>
             ))}
           </ul>

@@ -47,25 +47,45 @@ class MyModelView(APIView):
                 parsed_data, key=lambda k: (k["priority"], (k["difficulty"]))
             )
             print("sorted difficulty:", sorted_difficulty)
-            schedule.append((start_time.time(), sorted_difficulty[0]["name"]))
+            time_change = sorted_difficulty[0]["time"] or 1
+            schedule.append(
+                (
+                    sorted_difficulty[0]["name"],
+                    start_time.time(),
+                    (start_time + timedelta(minutes=time_change)).time(),
+                )
+            )
+            start_time = start_time + timedelta(minutes=time_change)
             for i in range(1, len(sorted_difficulty)):
                 print("task name:", sorted_difficulty[i]["name"])
                 print("task time:", sorted_difficulty[i]["time"])
-                time_change = sorted_difficulty[i]["time"] or 1
-                task_time = timedelta(minutes=time_change)
-                updated_time = start_time + task_time
+                # task_time = timedelta(minutes=time_change)
+                # updated_time = start_time # + task_time
                 schedule.append(
                     (
-                        updated_time.time(),
                         sorted_difficulty[i]["name"],
+                        start_time.time(),
+                        (
+                            start_time + timedelta(minutes=sorted_difficulty[i]["time"])
+                        ).time(),
                         # sorted_difficulty[i].get("priority", "N/A"),
                         # sorted_difficulty[i].get("difficulty", "N/A"),
                     )
                 )
-                start_time = updated_time
+                time_change = sorted_difficulty[i]["time"] or 1
+                task_time = timedelta(minutes=time_change)
+                start_time += task_time
             # for task in schedule:
             #     print(f"{task[0]} : {task[1]} - {task[2]} - {task[3]}")
-            response = [{"time": time, "task": task} for time, task in schedule]
+            response = [
+                {
+                    "title": title,
+                    "start": time,
+                    "end": end,
+                }
+                for title, time, end in schedule
+            ]
+            print("response", response)
         except json.JSONDecodeError as e:
             return Response(
                 {"error": "Invalid JSON data"}, status=status.HTTP_400_BAD_REQUEST
