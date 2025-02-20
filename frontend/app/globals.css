@@ -29,17 +29,48 @@ body {
 }
 
 .rbc-timeslot-group>.rbc-time-slot {
-  border-bottom: 1px solid rgb(209, 209, 209) !important;
+  /* border-bottom: 1px solid rgb(209, 209, 209) !important; */
 }
 
 .rbc-time-view {
   background-color: transparent;
+  border-radius: 0.5rem;
 }
 
+.rbc-label {
+  /* font-size: 12px; */
+}
+
+.rbc-events-container {
+  margin-right: 0px !important;
+}
+
+.rbc-events-container>.rbc-event {
+  background-color: rgb(59, 130, 246) !important;
+}
 /* .rbc-row,
 .rbc-time-slot {
-  background-color: transparent !important; 
-  backdrop-filter: blur(4px) !important; 
-  color: white; 
+  background-color: rgba(255, 255, 255, 0.2); /* 20% opacity */
+/* }  */
+
+/* .rbc-calendar {
+  background-color: rgba(255, 255, 255, 0.2) !important; 
+  backdrop-filter: blur(12px);
 } */
 
+.rbc-day-bg, .rbc-day-slot{
+  background-color: transparent!important; /* Lighter transparency for day cells */
+}
+
+
+.rbc-event {
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Optional transparent events */
+}
+
+.rbc-day-slot .rbc-time-slot {
+  border-top: 0.5px solid gray !important;
+}
+
+.rbc-current-time-indicator {
+  height: 2px !important;
+}

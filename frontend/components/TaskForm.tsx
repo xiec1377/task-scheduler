@@ -49,16 +49,15 @@ export default function TaskForm() {
   const convertToDateInLocalTimeZone = (timeString: string) => {
     // Get today's date in local time zone
     const today = new Date();
-  
+
     // Construct a new Date object with today's date and the time from item.start
-    const [hours, minutes] = timeString.split(':').map(Number);
-  
+    const [hours, minutes] = timeString.split(":").map(Number);
+
     // Create a new Date object using today's date and the provided time
     const localTimeDate = new Date(today.setHours(hours, minutes, 0, 0));
-  
+
     return localTimeDate;
   };
-
 
   const generateSchedule = async () => {
     console.log("generating schedule....");
@@ -99,43 +98,44 @@ export default function TaskForm() {
     {
       title: "Meeting with Team",
       start: new Date(2025, 1, 19, 9, 0), // February 19, 2025 at 9:00 AM
-      end: new Date(2025, 1, 19, 10, 0),   // February 19, 2025 at 10:00 AM
+      end: new Date(2025, 1, 19, 10, 0), // February 19, 2025 at 10:00 AM
       allDay: false,
     },
     {
       title: "Project Deadline",
       start: new Date(2025, 1, 19, 12, 0), // February 19, 2025 at 12:00 PM
-      end: new Date(2025, 1, 19, 13, 0),   // February 19, 2025 at 1:00 PM
+      end: new Date(2025, 1, 19, 13, 0), // February 19, 2025 at 1:00 PM
       allDay: false,
     },
     {
       title: "Lunch Break",
       start: new Date(2025, 1, 19, 13, 0), // February 19, 2025 at 1:00 PM
-      end: new Date(2025, 1, 19, 14, 0),   // February 19, 2025 at 2:00 PM
+      end: new Date(2025, 1, 19, 14, 0), // February 19, 2025 at 2:00 PM
       allDay: false,
     },
     {
       title: "Client Call",
       start: new Date(2025, 1, 19, 15, 0), // February 19, 2025 at 3:00 PM
-      end: new Date(2025, 1, 19, 16, 0),   // February 19, 2025 at 4:00 PM
+      end: new Date(2025, 1, 19, 16, 0), // February 19, 2025 at 4:00 PM
       allDay: false,
     },
     {
       title: "End of Day Wrap-Up",
       start: new Date(2025, 1, 19, 17, 0), // February 19, 2025 at 5:00 PM
-      end: new Date(2025, 1, 19, 18, 0),   // February 19, 2025 at 6:00 PM
+      end: new Date(2025, 1, 19, 18, 0), // February 19, 2025 at 6:00 PM
       allDay: false,
-    }
+    },
   ];
 
-  console.log("Testschedule", testschedule, typeof(testschedule[0].start))
-  
+  console.log("Testschedule", testschedule, typeof testschedule[0].start);
 
   const localizer = momentLocalizer(moment);
 
   return (
     <div className="w-[90vw] p-6 flex flex-col items-center gap-4">
-      <h1 className="w-full text-3xl font-bold text-center text-white mb-6">Task Scheduler</h1>
+      <h1 className="w-full text-3xl font-bold text-center text-white mb-6">
+        Task Scheduler
+      </h1>
       <div className="w-full flex flex-row items-start justify-center gap-4">
         <div className="w-1/3 flex flex-col items-start gap-4">
           <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
@@ -218,13 +218,21 @@ export default function TaskForm() {
             </div>
           </div>
           <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
-            <h2 className="text-xl font-semibold text-white mb-4">Tasks</h2>
+            <h2 className="text-xl font-semibold text-white mb-4">Todos</h2>
             <ul className="space-y-2">
               {tasks.map((task, index) => (
-                <li key={index} className="rounded-lg p-3 shadow-sm">
-                  <span className="font-medium">{task.name}</span> (Difficulty:{" "}
-                  {task.difficulty}, Priority: {task.priority}, Time:{" "}
-                  {task.time})
+                <li
+                  key={index}
+                  className="bg-white/20 rounded-lg p-3 shadow-sm"
+                >
+                  <label>
+                    <input type="checkbox" />
+                    <span className="font-medium">{task.name} </span>
+                  </label>
+                  <p>
+                    Difficulty: {task.difficulty} | Priority: {task.priority} |
+                    Time: {task.time}
+                  </p>
                 </li>
               ))}
             </ul>
