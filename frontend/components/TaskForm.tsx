@@ -133,12 +133,17 @@ export default function TaskForm() {
 
   return (
     <div className="w-[90vw] p-6 flex flex-col items-center gap-4">
+       <div className="fixed inset-0 ">
+        <div className="absolute top-20 left-10 w-60 h-60 bg-purple-400 rounded-full opacity-20 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-blue-400 rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-200 rounded-full opacity-10 blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+      </div>
       <h1 className="w-full text-3xl font-bold text-center text-white mb-6">
         Task Scheduler
       </h1>
       <div className="w-full flex flex-row items-start justify-center gap-4">
         <div className="w-1/3 flex flex-col items-start gap-4">
-          <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
+          <div className="bg-gradient-to-r from-white/10 to-transparent backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
             <h2 className="text-xl font-semibold text-white mb-4">
               Create a new task
             </h2>
@@ -217,7 +222,7 @@ export default function TaskForm() {
               </button>
             </div>
           </div>
-          <div className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
+          <div className="bg-gradient-to-r from-white/10 to-transparent backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-full">
             <h2 className="text-xl font-semibold text-white mb-4">Todos</h2>
             <ul className="space-y-2">
               {tasks.map((task, index) => (
@@ -251,7 +256,7 @@ export default function TaskForm() {
           startAccessor="start"
           endAccessor="end"
           view="day"
-          className="bg-white/20 backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-2/3 h-[100vh] text-white"
+          className="bg-gradient-to-r from-white/10 to-transparent backdrop-blur-md border border-white/20 shadow-lg rounded-lg p-8 shadow-md rounded-lg p-6 w-2/3 h-[100vh] text-white"
         />
       </div>
 
