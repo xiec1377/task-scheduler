@@ -80,8 +80,8 @@ class MyModelView(APIView):
             response = [
                 {
                     "title": title,
-                    "start": time,
-                    "end": end,
+                    "start": time.strftime("%H:%M:%S"),
+                    "end": end.strftime("%H:%M:%S"),
                 }
                 for title, time, end in schedule
             ]

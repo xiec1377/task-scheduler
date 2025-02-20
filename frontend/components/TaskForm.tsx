@@ -16,8 +16,8 @@ interface ScheduleItem {
   // end: Date | null;
   // title: string | ChildProcessWithoutNullStreams;
   title: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
 }
 
 export default function TaskForm() {
@@ -46,6 +46,20 @@ export default function TaskForm() {
     }
   };
 
+  const convertToDateInLocalTimeZone = (timeString: string) => {
+    // Get today's date in local time zone
+    const today = new Date();
+  
+    // Construct a new Date object with today's date and the time from item.start
+    const [hours, minutes] = timeString.split(':').map(Number);
+  
+    // Create a new Date object using today's date and the provided time
+    const localTimeDate = new Date(today.setHours(hours, minutes, 0, 0));
+  
+    return localTimeDate;
+  };
+
+
   const generateSchedule = async () => {
     console.log("generating schedule....");
     try {
@@ -65,12 +79,8 @@ export default function TaskForm() {
       setSchedule(
         result?.map((item: ScheduleItem) => ({
           title: item.title,
-          start: new Date(
-            new Date().toISOString().split("T")[0] + "T" + item.start
-          ),
-          end: new Date(
-            new Date().toISOString().split("T")[0] + "T" + item.end
-          ),
+          start: convertToDateInLocalTimeZone(item.start),
+          end: convertToDateInLocalTimeZone(item.end),
         }))
       );
     } catch (error) {
@@ -78,6 +88,48 @@ export default function TaskForm() {
     }
   };
   console.log("schedule:", schedule);
+
+  if (schedule && schedule.length > 0) {
+    console.log("Type of first schedule item start:", typeof schedule[0].start);
+  } else {
+    console.log("No schedule items available");
+  }
+
+  const testschedule = [
+    {
+      title: "Meeting with Team",
+      start: new Date(2025, 1, 19, 9, 0), // February 19, 2025 at 9:00 AM
+      end: new Date(2025, 1, 19, 10, 0),   // February 19, 2025 at 10:00 AM
+      allDay: false,
+    },
+    {
+      title: "Project Deadline",
+      start: new Date(2025, 1, 19, 12, 0), // February 19, 2025 at 12:00 PM
+      end: new Date(2025, 1, 19, 13, 0),   // February 19, 2025 at 1:00 PM
+      allDay: false,
+    },
+    {
+      title: "Lunch Break",
+      start: new Date(2025, 1, 19, 13, 0), // February 19, 2025 at 1:00 PM
+      end: new Date(2025, 1, 19, 14, 0),   // February 19, 2025 at 2:00 PM
+      allDay: false,
+    },
+    {
+      title: "Client Call",
+      start: new Date(2025, 1, 19, 15, 0), // February 19, 2025 at 3:00 PM
+      end: new Date(2025, 1, 19, 16, 0),   // February 19, 2025 at 4:00 PM
+      allDay: false,
+    },
+    {
+      title: "End of Day Wrap-Up",
+      start: new Date(2025, 1, 19, 17, 0), // February 19, 2025 at 5:00 PM
+      end: new Date(2025, 1, 19, 18, 0),   // February 19, 2025 at 6:00 PM
+      allDay: false,
+    }
+  ];
+
+  console.log("Testschedule", testschedule, typeof(testschedule[0].start))
+  
 
   const localizer = momentLocalizer(moment);
 
